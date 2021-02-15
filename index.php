@@ -55,7 +55,7 @@
 	    parties: [],
 	  },
 	  created() {
-	  	axios.get("http://localhost/CPE/readCSV.php")
+	  	axios.get("http://127.0.0.1:8000/readCSV.php")
 			.then(response => {
 				if (!response.error) {
 					this.parties = response.data.parties;
@@ -87,9 +87,6 @@
    <style>
    		#app {
    			margin-top: 50px;
-   		}
-
-   		.parties {
    		}
 
    		.parties .party {
