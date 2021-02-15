@@ -21,7 +21,7 @@ try {
             $party = $row[$party_index];
             $parties[$party]["facebook_spending"] += $row[$facebook_index];
             $parties[$party]["twitter_spending"] += $row[$twitter_index];
-            $total_spending  = $parties[$party]["facebook_spending"] + $parties[$party]["twitter_spending"];
+            $total_spending  = $row[$facebook_index] + $row[$twitter_index];
             $parties[$party]["total_spending"] += $total_spending;
             $parties[$party]["contributing_spending"][] = $total_spending;
 
@@ -35,12 +35,13 @@ try {
             $party["mean_spending"] = $total_spending / $candidate_count;
 
             asort($party["contributing_spending"]);
+            $contributing_spending = array_values($party["contributing_spending"]);
 
             $halved = ($candidate_count/2) - 1;
             if (floor($halved) == $halved) {
-                $party["medium_spending"] = ($party["contributing_spending"][$halved] + $party["contributing_spending"][$halved+1])/2;
+                $party["medium_spending"] = ($contributing_spending[$halved] + $contributing_spending[$halved+1])/2;
             } else {
-                $party["medium_spending"] = $party["contributing_spending"][ceil($halved)];
+                $party["medium_spending"] = $contributing_spending[ceil($halved)];
             }
 
             $img_src = null;
